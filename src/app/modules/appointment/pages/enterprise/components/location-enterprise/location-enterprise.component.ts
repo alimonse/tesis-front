@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./location-enterprise.component.scss'],
 })
 export class LocationEnterpriseComponent {
-  @Input() url = '';
-  @Input() lat = '';
-  @Input() long = '';
+  @Input() url!: string;
+  @Input() lat!: number;
+  @Input() lng!: number;
 }

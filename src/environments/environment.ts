@@ -4,6 +4,10 @@
 
 export const environment = {
   production: false,
+  server: {
+    url: 'http://localhost',
+    puerto: '3050',
+  },
 };
 
 /*

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ServicesComponent } from './services.component';
+import { ServiceComponent } from './service.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ServicesComponent,
+    component: ServiceComponent,
     data: {
       breadcrumb: 'Gestión servicios',
     },
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ServicesRoutingModule {}
+export class ServiceRoutingModule {}

@@ -37,8 +37,8 @@ const routes: Routes = [
       {
         path: 'services',
         loadChildren: () =>
-          import('./pages/services/services.module').then(
-            (mod) => mod.ServicesModule
+          import('./pages/service/service.module').then(
+            (mod) => mod.ServiceModule
           ),
       },
     ],

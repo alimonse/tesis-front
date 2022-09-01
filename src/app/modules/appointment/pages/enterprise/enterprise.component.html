@@ -1,4 +1,4 @@
-<section class="mt-10">
+<section class="mt-5">
   <div class="grid grid-cols-1 gap-4">
     <div class="col-span-1 md:col-start-10 md:col-span-12">
       <app-button
@@ -11,10 +11,20 @@
       </app-button>
     </div>
   </div>
-  <app-divider [text]="'Información'" [icon]="'pi-info-circle'"> </app-divider>
-  <app-table-info-enterprise [enterpriseInfo]="enterpriseInfo">
-  </app-table-info-enterprise>
-  <app-divider [text]="'Ubicación'" [icon]="'pi-map-marker'"> </app-divider>
-  <app-location-enterprise [lat]="'12312'" [long]="'12312'" [url]="'url'">
-  </app-location-enterprise>
+  <section *ngIf="enterprise; else sinEmpresa">
+    <app-divider [text]="'Información'" [icon]="'pi-info-circle'">
+    </app-divider>
+    <app-table-info-enterprise [enterpriseInfo]="enterpriseInfo">
+    </app-table-info-enterprise>
+    <app-divider [text]="'Ubicación'" [icon]="'pi-map-marker'"> </app-divider>
+    <app-location-enterprise
+      [lat]="enterprise.lat!"
+      [lng]="enterprise.lng!"
+      [url]="'url'"
+    >
+    </app-location-enterprise>
+  </section>
+  <ng-template #sinEmpresa>
+    <h1>Sin empresa</h1>
+  </ng-template>
 </section>

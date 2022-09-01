@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ServicesRoutingModule } from './services-routing.module';
-import { ServicesComponent } from './services.component';
+import { ServiceRoutingModule } from './service-routing.module';
+import { ServiceComponent } from './service.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { MaterialModule } from '../../../../material/material.module';
 import { PrimeNgModule } from '../../../../prime-ng/prime-ng.module';
@@ -13,18 +13,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    ServicesComponent,
+    ServiceComponent,
     ServiceTableComponent,
     ServiceFormComponent,
     ServiceModalFormComponent,
   ],
   imports: [
     CommonModule,
-    ServicesRoutingModule,
+    ServiceRoutingModule,
     ReactiveFormsModule,
     SharedModule,
     MaterialModule,
     PrimeNgModule,
   ],
 })
-export class ServicesModule {}
+export class ServiceModule {}

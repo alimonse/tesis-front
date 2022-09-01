@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ServiceModalFormComponent } from './modals/service-modal-form/service-modal-form.component';
 
 @Component({
-  selector: 'app-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.scss'],
+  selector: 'app-service',
+  templateUrl: './service.component.html',
+  styleUrls: ['./service.component.scss'],
 })
-export class ServicesComponent {
+export class ServiceComponent {
   services = [
     {
       id: 1,

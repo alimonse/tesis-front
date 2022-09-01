@@ -1,8 +1,8 @@
-<form [formGroup]="form" (keyup.enter)="sendForm()" class="mt-5">
+<form [formGroup]="form" (ngSubmit)="sendForm()" class="mt-5">
   <div class="grid grid-cols-8 gap-2">
     <div class="col-span-8 md:col-span-4">
       <app-input
-        id="nombre"
+        id="nombreComercial"
         label="Nombre empresa"
         placeholder="Ej: Bago"
         [type]="'text'"
@@ -12,7 +12,7 @@
     </div>
     <div class="col-span-8 md:col-span-4">
       <app-input
-        id="saludo"
+        id="mensajeSaludo"
         label="Mensaje saludo"
         placeholder="Ej: Bago"
         [type]="'text'"
@@ -60,5 +60,9 @@
         [required]="true"
       ></app-input>
     </div>
+  </div>
+  <div class="grid grid-cols-2 gap-4 mt-10">
+    <app-button text="Cancelar" (clickAction)="cancel()"></app-button>
+    <app-button text="Registrar" [isFormButton]="true"></app-button>
   </div>
 </form>

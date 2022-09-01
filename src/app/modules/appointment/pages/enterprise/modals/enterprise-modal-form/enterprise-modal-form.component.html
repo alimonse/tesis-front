@@ -1,12 +1,21 @@
 <h2 mat-dialog-title class="text-center">Editar empresa</h2>
 <mat-dialog-content class="mat-typography">
-  <app-enterprise-form> </app-enterprise-form>
+  <app-enterprise-form
+    [formData]="this.data"
+    (onUpdate)="edit($event)"
+    (onCancel)="cancel()"
+  >
+  </app-enterprise-form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <app-button
-    text="Cancelar"
-    class="mr-10"
-    (clickAction)="cancel()"
-  ></app-button>
-  <app-button text="Registrar" (clickAction)="edit()"></app-button>
+  <!--  <app-button-->
+  <!--    text="Cancelar"-->
+  <!--    class="mr-10"-->
+  <!--    (clickAction)="cancel()"-->
+  <!--  ></app-button>-->
+  <!--  <app-button-->
+  <!--    text="Registrar"-->
+  <!--    (clickAction)="edit()"-->
+  <!--    [isFormButton]="true"-->
+  <!--  ></app-button>-->
 </mat-dialog-actions>
