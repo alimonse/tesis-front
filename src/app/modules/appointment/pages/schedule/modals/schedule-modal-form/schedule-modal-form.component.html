@@ -1,0 +1,12 @@
+<h2 mat-dialog-title class="text-center">Editar horario</h2>
+<mat-dialog-content class="mat-typography">
+  <app-schedule-form> </app-schedule-form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-button
+    text="Cancelar"
+    class="mr-10"
+    (clickAction)="cancel()"
+  ></app-button>
+  <app-button text="Registrar" (clickAction)="edit()"></app-button>
+</mat-dialog-actions>

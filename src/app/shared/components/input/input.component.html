@@ -1,0 +1,46 @@
+<section *ngIf="control" class="mt-1">
+  <section
+    [formGroup]="formGroup"
+    [class.invalid]="control.touched && control.invalid"
+  >
+    <span class="p-float-label">
+      <input
+        pInputText
+        *ngIf="!isTextarea"
+        [type]="type"
+        [placeholder]="placeholder"
+        [attr.name]="id"
+        [attr.id]="id"
+        [formControl]="control"
+        [readOnly]="readonly"
+        class="w-full"
+        autocomplete="off"
+      />
+      <textarea
+        pInputTextarea
+        *ngIf="isTextarea"
+        [placeholder]="placeholder"
+        [attr.name]="id"
+        [attr.id]="id"
+        [formControl]="control"
+        [rows]="textareaRows"
+        [readOnly]="readonly"
+        class="w-full"
+        autocomplete="off"
+      ></textarea>
+      <label
+        [for]="id"
+        [ngClass]="{
+          'text-red-500': control.errors && control.touched
+        }"
+        *ngIf="label"
+        >{{ label }}{{ required ? "*" : "" }}</label
+      >
+    </span>
+    <small
+      *ngIf="control.errors && control.touched && control.invalid"
+      class="p-error block"
+      >{{ control.errors[objectError.keys(control.errors)[0]] }}</small
+    >
+  </section>
+</section>

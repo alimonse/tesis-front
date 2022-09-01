@@ -1,0 +1,26 @@
+@import "partials/font";
+@import "partials/config";
+
+
+// tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// primeng
+@import "~primeng/resources/primeng.min.css";
+@import "~primeng/resources/themes/md-light-indigo/theme.css";
+@import "~primeicons/primeicons.css";
+
+// angular material
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// partials
+@import "partials/table";
+@import "partials/divider";
+@import "partials/input";
+@import "partials/breadcrumb";
+@import "partials/autocomplete";
+
+// external
+@import "external/primeNg";

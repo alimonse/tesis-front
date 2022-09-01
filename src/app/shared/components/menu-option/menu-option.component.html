@@ -1,0 +1,11 @@
+<div
+  class="bg-tesis-600 rounded-xl flex justify-center h-52 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-tesis-400 duration-300 cursor-pointer"
+  (click)="onClick()"
+>
+  <img [src]="pathImg" class="p-5" alt="option" />
+</div>
+<div class="text-center mt-10 text-gray-500 cursor-default">
+  <span class="text-xl">
+    {{ name | titlecase }}
+  </span>
+</div>

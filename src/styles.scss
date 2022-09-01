@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@import "assets/scss/styles";
+
+* {
+  font-family: $font;
+}
+
+.custom-mat-dialog {
+  mat-dialog-container {
+    background-color: white;
+    color: black;
+  }
+}

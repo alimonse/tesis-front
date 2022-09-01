@@ -1,0 +1,58 @@
+<p-table
+  responsiveLayout="stack"
+  [value]="services"
+  styleClass="p-datatable-sm"
+  [columns]="cols"
+  [paginator]="true"
+  [rows]="rows"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [rowsPerPageOptions]="rowsPerPageOptions"
+  [lazy]="true"
+  [totalRecords]="services.length"
+  (onLazyLoad)="cargarRegistros($event)"
+>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        <div class="flex justify-content-center align-items-center">
+          <span class="mt-1 mr-2">{{ col.header }}</span>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        <span class="p-column-title text-sm font-medium">
+          <strong>{{ col.header }}</strong>
+        </span>
+        <section *ngIf="col.header !== 'Acciones'; else btnAcciones">
+          {{ rowData[col.field] }}
+        </section>
+        <ng-template #btnAcciones>
+          <app-icon-button
+            class="p-1"
+            [isMaterialIcon]="true"
+            [icon]="'edit_document'"
+            (clickAction)="edit(rowData)"
+          >
+          </app-icon-button>
+          <app-icon-button
+            class="p-1"
+            [isMaterialIcon]="true"
+            [icon]="'edit_calendar'"
+            (clickAction)="goToSchedule(rowData)"
+          >
+          </app-icon-button>
+        </ng-template>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="6">No se encontraron registros.</td>
+    </tr>
+  </ng-template>
+</p-table>

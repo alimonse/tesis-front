@@ -1,0 +1,20 @@
+<section class="grid grid-cols-1 mt-20 cursor-default">
+  <h1 class="text-3xl flex justify-center text-gray-500 font-semibold">
+    {{ "bienvenido" | uppercase }}
+  </h1>
+  <div class="mt-5 flex justify-center">
+    <span class="text-base text-gray-500">
+      Seleccione la gestión a realizar
+    </span>
+  </div>
+</section>
+<div class="grid grid-cols-3 gap-20 p-10">
+  <app-menu-option
+    *ngFor="let option of options"
+    class="col-span-3 md:col-span-1"
+    [pathImg]="option.pathImg"
+    [name]="option.name"
+    (clickAction)="goToOption(option.route)"
+  >
+  </app-menu-option>
+</div>

@@ -1,0 +1,64 @@
+<form [formGroup]="form" (keyup.enter)="sendForm()" class="mt-5">
+  <div class="grid grid-cols-8 gap-2">
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="nombre"
+        label="Nombre empresa"
+        placeholder="Ej: Bago"
+        [type]="'text'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="saludo"
+        label="Mensaje saludo"
+        placeholder="Ej: Bago"
+        [type]="'text'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="informacion"
+        label="Información sobre empresa"
+        placeholder="Ej: Bago"
+        [type]="'text'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="ubicacion"
+        label="Ubicación google maps"
+        placeholder="Ej: Bago"
+        [type]="'text'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="lat"
+        label="Latitud"
+        placeholder="Ej: Bago"
+        [type]="'text'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="lng"
+        label="Longitud"
+        placeholder="Ej: Bago"
+        [type]="'text'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,18 @@
+<section class="m-20">
+  <div class="grid grid-cols-1 gap-4">
+    <div class="col-span-1 md:col-start-10 md:col-span-12">
+      <app-button
+        [text]="'Crear'"
+        [isFormButton]="false"
+        (clickAction)="create()"
+        [isMaterialIcon]="true"
+        [icon]="'add_circle_outline'"
+      >
+      </app-button>
+    </div>
+  </div>
+  <app-schedule-table
+    [schedules]="schedules"
+    (onEdit)="edit($event)"
+  ></app-schedule-table>
+</section>

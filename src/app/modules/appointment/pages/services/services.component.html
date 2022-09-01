@@ -1,0 +1,16 @@
+<section class="mt-20">
+  <div class="grid grid-cols-1 gap-4">
+    <div class="col-span-1 md:col-start-10 md:col-span-12">
+      <app-button
+        [text]="'Crear'"
+        [isFormButton]="false"
+        (clickAction)="create()"
+        [isMaterialIcon]="true"
+        [icon]="'add_circle_outline'"
+      >
+      </app-button>
+    </div>
+  </div>
+  <app-service-table [services]="services" (onEdit)="edit($event)">
+  </app-service-table>
+</section>

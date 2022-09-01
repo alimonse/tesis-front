@@ -1,0 +1,29 @@
+<div class="flex flex-col h-screen bg-gray-50">
+  <div>
+    <app-header></app-header>
+  </div>
+  <div class="ml-10">
+    <div class="ml-10 mt-10">
+      <xng-breadcrumb separator="/" [autoGenerate]="false">
+        <ng-container
+          *xngBreadcrumbItem="
+            let breadcrumb;
+            let info = info;
+            let first = first
+          "
+        >
+          <mat-icon *ngIf="info">{{ info }}</mat-icon>
+          <ng-container>
+            <span class="ml-0.5">{{ breadcrumb }}</span>
+          </ng-container>
+        </ng-container>
+      </xng-breadcrumb>
+    </div>
+  </div>
+  <div class="flex-1 w-full lg:px-28 md:px-1 px-10">
+    <router-outlet></router-outlet>
+  </div>
+  <div>
+    <app-footer></app-footer>
+  </div>
+</div>

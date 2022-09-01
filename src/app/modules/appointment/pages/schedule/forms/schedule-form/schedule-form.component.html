@@ -1,0 +1,42 @@
+<form [formGroup]="form" (keyup.enter)="sendForm()" class="mt-5">
+  <div class="grid grid-cols-8 gap-2">
+    <div class="col-span-8">
+      <app-autocomplete
+        id="servicio"
+        label="Servicio"
+        placeholder="Ej: Especialidad"
+        [formGroup]="form"
+        [required]="true"
+        [opciones]="opcionesServicios"
+      >
+      </app-autocomplete>
+    </div>
+    <div class="col-span-8">
+      <app-input
+        id="dia"
+        label="Dia"
+        [type]="'date'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="desde"
+        label="Desde"
+        [type]="'time'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="hasta"
+        label="Hasta"
+        [type]="'time'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+  </div>
+</form>

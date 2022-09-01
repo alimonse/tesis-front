@@ -1,0 +1,18 @@
+<button
+  mat-mini-fab
+  color="primary"
+  class="bg-tesis-500 hover:bg-tesis-600"
+  (click)="!isDisabled && onClick()"
+  [title]="title"
+>
+  <i
+    *ngIf="!isMaterialIcon; else materialIcon"
+    class="pi {{ icon }}"
+    style="font-size: 1rem"
+  ></i>
+  <ng-template #materialIcon>
+    <span class="material-icons" style="font-size: 1rem">
+      {{ icon }}
+    </span>
+  </ng-template>
+</button>

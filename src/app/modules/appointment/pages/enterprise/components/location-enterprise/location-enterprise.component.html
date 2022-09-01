@@ -1,0 +1,20 @@
+<div class="grid grid-cols-1 m-10">
+  <div class="p-5">
+    <section class="mt-5">
+      <span class="font-normal text-x">
+        <strong>Ubicación google map: </strong> {{ url }}
+      </span>
+    </section>
+    <section class="mt-5 text-center">
+      <span class="font-normal text-x">
+        <div class="mt-5"><strong>Latitud: </strong>{{ lat }}</div>
+        <div class="mt-5"><strong>longitud: </strong>{{ long }}</div>
+      </span>
+    </section>
+  </div>
+  <div class="p-5">
+    <section class="mt-5">
+      <app-map></app-map>
+    </section>
+  </div>
+</div>
