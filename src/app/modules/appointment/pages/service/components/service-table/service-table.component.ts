@@ -46,7 +46,6 @@ export class ServiceTableComponent {
   }
 
   edit(rowData: any) {
-    console.log(rowData);
     this.onEdit.emit(rowData);
   }
 

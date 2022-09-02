@@ -41,17 +41,21 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  edit(service: any) {
-    console.log(service);
+  edit(service: ScheduleInterface) {
     const dialogRef = this.dialog.open(ScheduleModalFormComponent, {
       width: '800px',
       panelClass: 'custom-mat-dialog',
-      data: {},
+      data: service,
     });
 
     dialogRef.afterClosed().subscribe({
-      next: () => {
-        console.log('modal');
+      next: (value) => {
+        if (value) {
+          const idItem = this.schedules.findIndex(
+            (item) => item.id === service.id
+          );
+          this.schedules[idItem] = value;
+        }
       },
     });
   }
@@ -72,8 +76,6 @@ export class ScheduleComponent implements OnInit {
         this.schedules = value[0]
           .map((item) => this.formatDataTable(item))
           .flat();
-
-        console.log(this.schedules);
       },
       error: (err) => {
         console.log(err);

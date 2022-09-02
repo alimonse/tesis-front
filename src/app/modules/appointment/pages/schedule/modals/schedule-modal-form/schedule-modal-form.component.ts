@@ -5,7 +5,7 @@ import { ServiceInterface } from '../../../service/interfaces/service.interface'
 import { DayService } from '../../services/day.service';
 import { HourService } from '../../services/hour.service';
 import { CreateScheduleInterface } from '../../interfaces/create-schedule.interface';
-import { mergeMap } from 'rxjs';
+import { concat, concatMap, mergeMap, scan } from 'rxjs';
 import { ServiceService } from '../../../service/services/service.service';
 import { DayInterface } from '../../interfaces/day.interface';
 import { HourInterface } from '../../interfaces/hour.interface';
@@ -23,10 +23,7 @@ export class ScheduleModalFormComponent {
     private readonly _serviceService: ServiceService,
     public dialogRef: MatDialogRef<ScheduleFormComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: {
-      // !tipar
-      data: any;
-    }
+    public data: ScheduleInterface
   ) {}
 
   createOrEdit(payload: ServiceInterface | CreateScheduleInterface) {
@@ -69,7 +66,36 @@ export class ScheduleModalFormComponent {
           },
         });
     } else {
-      console.log('edit', payload);
+      const { id: idHora, idPrestacion, idDia } = this.data;
+      payload = payload as CreateScheduleInterface;
+      const dayEdit$ = this._dayService.updateOne(idDia!, { dia: payload.dia });
+      const hourEdit$ = this._hourService.updateOne(idHora!, {
+        desde: payload.desde,
+        hasta: payload.hasta,
+      });
+      const serviceEdit$ = this._serviceService.updateOne(idPrestacion!, {
+        horarioDia: payload.servicio,
+      });
+      dayEdit$
+        .pipe(
+          concatMap(() => hourEdit$),
+          concatMap(() => serviceEdit$)
+        )
+        .subscribe({
+          next: (value) => {
+            this.dialogRef.close(
+              this.formatData(
+                { ...payload, id: idDia },
+                { ...payload, id: idHora },
+                value
+              )
+            );
+          },
+          error: (err) => {
+            console.log(err);
+            this.dialogRef.close();
+          },
+        });
     }
   }
 

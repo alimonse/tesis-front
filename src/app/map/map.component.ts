@@ -17,7 +17,6 @@ export class MapComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    console.log(this._placesService.isUserLocationReady);
     // if (!this._placesService.userLocation)
     //   throw new Error('Sin location _placesService.userLocation');
 

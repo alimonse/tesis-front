@@ -12,7 +12,6 @@ export class MenuOptionComponent {
   clickAction = new EventEmitter();
 
   onClick(): void {
-    console.log('hs');
     this.clickAction.emit();
   }
 }

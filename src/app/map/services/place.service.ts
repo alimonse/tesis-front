@@ -26,7 +26,6 @@ export class PlaceService {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         ({ coords }) => {
-          console.log(coords);
           this.userLocation = [coords.longitude, coords.latitude];
           resolve(this.userLocation);
         },

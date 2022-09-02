@@ -55,7 +55,6 @@ export class InputComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['formGroup']) {
       this.control = this.formGroup.get(this.id) as FormControl;
-      console.log(this.control);
     }
   }
 

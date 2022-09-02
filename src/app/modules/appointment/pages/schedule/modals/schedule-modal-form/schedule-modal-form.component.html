@@ -1,6 +1,9 @@
-<h2 mat-dialog-title class="text-center">Editar horario</h2>
+<h2 mat-dialog-title class="text-center">
+  {{ data ? "Editar" : "Crear" }} horario
+</h2>
 <mat-dialog-content class="mat-typography">
   <app-schedule-form
+    [formData]="data"
     (onCreateOrUpdate)="createOrEdit($event)"
     (onCancel)="cancel()"
   >

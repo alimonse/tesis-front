@@ -29,7 +29,6 @@ export class EnterpriseModalFormComponent {
     delete paylaod.ubicacion;
     this._enterpriseService.updateOne(id!, paylaod).subscribe({
       next: (value) => {
-        console.log(value);
         this.dialogRef.close({ ...this.data, ...value });
       },
       error: (err) => {

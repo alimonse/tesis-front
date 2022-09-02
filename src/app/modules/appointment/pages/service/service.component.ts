@@ -21,7 +21,6 @@ export class ServiceComponent implements OnInit {
     this._serviceService.findAll().subscribe({
       next: (value) => {
         this.services = value[0];
-        console.log(this.services);
       },
       error: (err) => {
         console.log(err);
@@ -45,7 +44,6 @@ export class ServiceComponent implements OnInit {
   }
 
   edit(service: ServiceInterface) {
-    console.log(service);
     const dialogRef = this.dialog.open(ServiceModalFormComponent, {
       width: '800px',
       panelClass: 'custom-mat-dialog',

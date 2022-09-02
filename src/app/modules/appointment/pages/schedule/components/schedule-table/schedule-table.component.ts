@@ -47,8 +47,7 @@ export class ScheduleTableComponent {
     console.log(event);
   }
 
-  edit(rowData: any) {
-    console.log(rowData);
+  edit(rowData: ScheduleInterface) {
     this.onEdit.emit(rowData);
   }
 }

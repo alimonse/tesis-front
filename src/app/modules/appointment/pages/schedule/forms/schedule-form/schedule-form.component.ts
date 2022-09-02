@@ -5,7 +5,9 @@ import { FormsUtil } from '../../../../../../utils/forms.util';
 import { AutocompleteInterface } from '../../../../../../shared/components/autocomplete/autocomplete.component';
 import { ServiceService } from '../../../service/services/service.service';
 import { ServiceInterface } from '../../../service/interfaces/service.interface';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
+import { ScheduleInterface } from '../../interfaces/schedule.interface';
+import { EMPTY_VALUE } from '../../../../../../constants/constants';
 
 @Component({
   selector: 'app-schedule-form',
@@ -13,7 +15,7 @@ import {formatDate} from '@angular/common';
   styleUrls: ['./schedule-form.component.scss'],
 })
 export class ScheduleFormComponent implements OnInit {
-  @Input() formData: any;
+  @Input() formData: ScheduleInterface | undefined;
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onCreateOrUpdate: EventEmitter<ServiceInterface> =
     new EventEmitter();
@@ -35,35 +37,31 @@ export class ScheduleFormComponent implements OnInit {
 
   private buildForm() {
     this.form = this._formBuilder.group({
-      servicio: ['', [FormsUtil.requiredValidator('servicio')]],
+      servicio: [
+        this.formData?.idPrestacion ?? EMPTY_VALUE,
+        [FormsUtil.requiredValidator('servicio')],
+      ],
       dia: [
-        '',
-        [
-          FormsUtil.minLengthValidator('nombre', 3),
-          FormsUtil.requiredValidator('dia'),
-        ],
+        this.formData?.dia ?? EMPTY_VALUE,
+        [FormsUtil.requiredValidator('dia')],
       ],
       desde: [
-        '',
-        [
-          FormsUtil.minLengthValidator('nombre', 3),
-          FormsUtil.requiredValidator('desde'),
-        ],
+        this.formData?.desde
+          ? formatDate(new Date(this.formData?.desde), 'yyyy-MM-ddThh:mm', 'en')
+          : EMPTY_VALUE,
+        [FormsUtil.requiredValidator('desde')],
       ],
       hasta: [
-        '',
-        [
-          FormsUtil.minLengthValidator('nombre', 3),
-          FormsUtil.requiredValidator('hasta'),
-        ],
+        this.formData?.hasta
+          ? formatDate(new Date(this.formData?.hasta), 'yyyy-MM-ddThh:mm', 'en')
+          : EMPTY_VALUE,
+        [FormsUtil.requiredValidator('hasta')],
       ],
     });
   }
 
   sendForm() {
     if (this.form.valid) {
-      console.log(this.form.value.dia);
-      // formatDate(this.form.value.dia)
       this.onCreateOrUpdate.emit(this.form.value);
     } else {
       this.form.markAllAsTouched();

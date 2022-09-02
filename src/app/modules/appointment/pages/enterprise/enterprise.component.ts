@@ -39,7 +39,6 @@ export class EnterpriseComponent implements OnInit {
   }
 
   edit() {
-    console.log(this.enterprise);
     const dialogRef = this.dialog.open(EnterpriseModalFormComponent, {
       width: '800px',
       panelClass: 'custom-mat-dialog',
