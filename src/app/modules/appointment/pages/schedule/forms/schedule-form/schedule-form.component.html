@@ -1,10 +1,9 @@
-<form [formGroup]="form" (keyup.enter)="sendForm()" class="mt-5">
+<form [formGroup]="form" (ngSubmit)="sendForm()" class="mt-5">
   <div class="grid grid-cols-8 gap-2">
     <div class="col-span-8">
       <app-autocomplete
         id="servicio"
         label="Servicio"
-        placeholder="Ej: Especialidad"
         [formGroup]="form"
         [required]="true"
         [opciones]="opcionesServicios"
@@ -24,7 +23,7 @@
       <app-input
         id="desde"
         label="Desde"
-        [type]="'time'"
+        [type]="'datetime-local'"
         [formGroup]="form"
         [required]="true"
       ></app-input>
@@ -33,10 +32,14 @@
       <app-input
         id="hasta"
         label="Hasta"
-        [type]="'time'"
+        [type]="'datetime-local'"
         [formGroup]="form"
         [required]="true"
       ></app-input>
     </div>
+  </div>
+  <div class="grid grid-cols-2 gap-4 mt-10">
+    <app-button text="Cancelar" (clickAction)="cancel()"></app-button>
+    <app-button text="Guardar" [isFormButton]="true"></app-button>
   </div>
 </form>

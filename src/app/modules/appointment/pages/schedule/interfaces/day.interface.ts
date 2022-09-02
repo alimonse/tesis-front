@@ -1,8 +1,8 @@
-import { ColaboradorInterface } from '../../../../../interfaces/colaborador.interface';
+import { ServiceInterface } from '../../service/interfaces/service.interface';
 
 export interface DayInterface {
   dia?: string;
-  colaborador?: number | ColaboradorInterface;
+  prestacion?: number | ServiceInterface[];
   habilitado?: 0 | 1;
   id?: number;
   fechaCreacion?: Date;

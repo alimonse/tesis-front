@@ -9,4 +9,5 @@ export interface ServiceInterface {
   habilitado?: 0 | 1;
   oficina?: number;
   colaborador?: number;
+  horarioDia?: number;
 }

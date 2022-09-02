@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ScheduleModalFormComponent } from './modals/schedule-modal-form/schedule-modal-form.component';
 import { DayService } from './services/day.service';
 import { HourService } from './services/hour.service';
-import { ColaboradorInterface } from '../../../../interfaces/colaborador.interface';
 import { DayInterface } from './interfaces/day.interface';
 import { HourInterface } from './interfaces/hour.interface';
 import { ServiceInterface } from '../service/interfaces/service.interface';
@@ -34,8 +33,10 @@ export class ScheduleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe({
-      next: () => {
-        console.log('modal');
+      next: (value) => {
+        if (value) {
+          this.schedules.unshift(value);
+        }
       },
     });
   }
@@ -57,15 +58,9 @@ export class ScheduleComponent implements OnInit {
 
   getSchedules() {
     const query: any = {
-      where: {
-        // id: 1,
-      },
+      where: {},
     };
-    query.relations = [
-      'horarioDia',
-      'horarioDia.colaborador',
-      'horarioDia.colaborador.prestaciones',
-    ];
+    query.relations = ['horarioDia', 'horarioDia.prestacion'];
     const getHours$ = this._hourService.findAll(
       `busqueda=${JSON.stringify(query)}`
     );
@@ -89,16 +84,12 @@ export class ScheduleComponent implements OnInit {
 
   formatDataTable(horarioHora: HourInterface): ScheduleInterface[] {
     const { horarioDia } = horarioHora;
-    const { colaborador } = horarioDia as DayInterface;
-    const { prestaciones } = colaborador as ColaboradorInterface;
-    console.log(horarioHora, horarioDia);
-    const data = (prestaciones as ServiceInterface[]).map((item) => {
+    const { prestacion } = horarioDia as DayInterface;
+    const data = (prestacion as ServiceInterface[]).map((item) => {
       const hora = horarioHora as HourInterface;
       const dia = horarioDia as DayInterface;
       const { id: idPrestacion } = item;
       const { id: idDia } = dia;
-
-      delete dia.colaborador;
       delete dia.id;
       delete hora.horarioDia;
       delete item.id;
