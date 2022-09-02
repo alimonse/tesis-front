@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TableColumnInterface } from '../../../../../../interfaces/table-column.interface';
 import {
   ROWS,
   ROWS_PER_PAGE_OPTION,
 } from '../../../../../../constants/constants';
+import { ScheduleInterface } from '../../interfaces/schedule.interface';
 
 @Component({
   selector: 'app-schedule-table',
@@ -11,23 +12,23 @@ import {
   styleUrls: ['./schedule-table.component.scss'],
 })
 export class ScheduleTableComponent {
-  @Input() schedules: any[] = [];
+  @Input() schedules: ScheduleInterface[] = [];
 
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onEdit: EventEmitter<any> = new EventEmitter();
 
   cols: TableColumnInterface[] = [
     {
-      header: 'Nombre',
-      field: 'nombre',
+      header: 'Nombre servicio',
+      field: 'nombreServicio',
     },
     {
-      header: 'URL',
-      field: 'url',
+      header: 'Descripción',
+      field: 'descripcion',
     },
     {
       header: 'Horario',
-      field: 'horario',
+      field: 'desde',
     },
     {
       header: 'Dia',

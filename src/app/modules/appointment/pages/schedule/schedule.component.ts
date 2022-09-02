@@ -1,94 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ScheduleModalFormComponent } from './modals/schedule-modal-form/schedule-modal-form.component';
+import { DayService } from './services/day.service';
+import { HourService } from './services/hour.service';
+import { ColaboradorInterface } from '../../../../interfaces/colaborador.interface';
+import { DayInterface } from './interfaces/day.interface';
+import { HourInterface } from './interfaces/hour.interface';
+import { ServiceInterface } from '../service/interfaces/service.interface';
+import { ScheduleInterface } from './interfaces/schedule.interface';
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss'],
 })
-export class ScheduleComponent {
-  schedules = [
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-      horario: '15h00 - 16h00',
-      dia: 'Lunes',
-    },
-  ];
+export class ScheduleComponent implements OnInit {
+  schedules: ScheduleInterface[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    private readonly _dayService: DayService,
+    private readonly _hourService: HourService,
+    public dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
+    this.getSchedules();
+  }
 
   create() {
     const dialogRef = this.dialog.open(ScheduleModalFormComponent, {
@@ -116,5 +53,63 @@ export class ScheduleComponent {
         console.log('modal');
       },
     });
+  }
+
+  getSchedules() {
+    const query: any = {
+      where: {
+        // id: 1,
+      },
+    };
+    query.relations = [
+      'horarioDia',
+      'horarioDia.colaborador',
+      'horarioDia.colaborador.prestaciones',
+    ];
+    const getHours$ = this._hourService.findAll(
+      `busqueda=${JSON.stringify(query)}`
+    );
+    getHours$.subscribe({
+      next: (value) => {
+        if (!value[0].length) {
+          console.log('sin data');
+        }
+        this.schedules = value[0]
+          .map((item) => this.formatDataTable(item))
+          .flat();
+
+        console.log(this.schedules);
+      },
+      error: (err) => {
+        console.log(err);
+        this.schedules = [];
+      },
+    });
+  }
+
+  formatDataTable(horarioHora: HourInterface): ScheduleInterface[] {
+    const { horarioDia } = horarioHora;
+    const { colaborador } = horarioDia as DayInterface;
+    const { prestaciones } = colaborador as ColaboradorInterface;
+    console.log(horarioHora, horarioDia);
+    const data = (prestaciones as ServiceInterface[]).map((item) => {
+      const hora = horarioHora as HourInterface;
+      const dia = horarioDia as DayInterface;
+      const { id: idPrestacion } = item;
+      const { id: idDia } = dia;
+
+      delete dia.colaborador;
+      delete dia.id;
+      delete hora.horarioDia;
+      delete item.id;
+      return {
+        ...hora,
+        ...dia,
+        ...item,
+        idPrestacion,
+        idDia,
+      };
+    });
+    return data;
   }
 }

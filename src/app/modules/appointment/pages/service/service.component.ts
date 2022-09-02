@@ -1,167 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ServiceModalFormComponent } from './modals/service-modal-form/service-modal-form.component';
+import { ServiceService } from './services/service.service';
+import { ServiceInterface } from './interfaces/service.interface';
 
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss'],
 })
-export class ServiceComponent {
-  services = [
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 1,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 2,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-    {
-      id: 3,
-      nombre: 'Desarrollo',
-      url: 'Desarrollo',
-    },
-  ];
+export class ServiceComponent implements OnInit {
+  services: ServiceInterface[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private readonly _serviceService: ServiceService
+  ) {}
+
+  ngOnInit(): void {
+    this._serviceService.findAll().subscribe({
+      next: (value) => {
+        this.services = value[0];
+        console.log(this.services);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   create() {
     const dialogRef = this.dialog.open(ServiceModalFormComponent, {
@@ -170,23 +36,30 @@ export class ServiceComponent {
     });
 
     dialogRef.afterClosed().subscribe({
-      next: () => {
-        console.log('modal');
+      next: (value) => {
+        if (value) {
+          this.services.unshift(value);
+        }
       },
     });
   }
 
-  edit(service: any) {
+  edit(service: ServiceInterface) {
     console.log(service);
     const dialogRef = this.dialog.open(ServiceModalFormComponent, {
       width: '800px',
       panelClass: 'custom-mat-dialog',
-      data: {},
+      data: service,
     });
 
     dialogRef.afterClosed().subscribe({
-      next: () => {
-        console.log('modal');
+      next: (value) => {
+        if (value) {
+          const idItem = this.services.findIndex(
+            (item) => item.id === service.id
+          );
+          this.services[idItem] = value;
+        }
       },
     });
   }

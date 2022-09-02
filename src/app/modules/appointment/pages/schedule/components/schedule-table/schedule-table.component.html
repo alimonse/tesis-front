@@ -27,10 +27,25 @@
         <span class="p-column-title text-sm font-medium">
           <strong>{{ col.header }}</strong>
         </span>
-        <section *ngIf="col.header !== 'Acciones'; else btnAcciones">
+        <section *ngIf="col.header === 'Nombre servicio'">
           {{ rowData[col.field] }}
         </section>
-        <ng-template #btnAcciones>
+        <section *ngIf="col.header === 'Descripción'">
+          {{ rowData[col.field] }}
+        </section>
+        <section *ngIf="col.header === 'Horario'">
+          <strong class="text-sm font-medium">Desde: </strong
+          ><span class="text-sm font-normal">
+            {{ rowData[col.field] | date: "h:mm" }}
+          </span>
+          <br />
+          <strong class="text-sm font-medium">Hasta: </strong
+          >{{ rowData["hasta"] | date: "h:mm" }}
+        </section>
+        <section *ngIf="col.header === 'Dia'">
+          {{ rowData[col.field] }}
+        </section>
+        <section *ngIf="col.header === 'Acciones'">
           <app-icon-button
             class="p-1"
             [isMaterialIcon]="true"
@@ -38,7 +53,7 @@
             (clickAction)="edit(rowData)"
           >
           </app-icon-button>
-        </ng-template>
+        </section>
       </td>
     </tr>
   </ng-template>

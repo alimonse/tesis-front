@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ServiceFormComponent } from '../../forms/service-form/service-form.component';
+import { ServiceInterface } from '../../interfaces/service.interface';
+import { ServiceService } from '../../services/service.service';
 
 @Component({
   selector: 'app-service-modal-form',
@@ -11,15 +13,37 @@ export class ServiceModalFormComponent {
   constructor(
     public dialogRef: MatDialogRef<ServiceFormComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: {
-      // !tipar
-      data: any;
-    }
+    public data: ServiceInterface,
+    private readonly _serviceService: ServiceService
   ) {}
 
-  edit() {
-    console.log('edit');
-    this.dialogRef.close();
+  createOrEdit(payload: ServiceInterface) {
+    if (!this.data) {
+      //! quemados para una sola empresa
+      payload.colaborador = 1;
+      payload.oficina = 1;
+      //! ------------------------------
+      this._serviceService.create(payload).subscribe({
+        next: (value) => {
+          this.dialogRef.close(value);
+        },
+        error: (err) => {
+          console.log(err);
+          this.dialogRef.close();
+        },
+      });
+    } else {
+      const { id } = this.data;
+      this._serviceService.updateOne(id!, payload).subscribe({
+        next: (value) => {
+          this.dialogRef.close(value);
+        },
+        error: (err) => {
+          console.log(err);
+          this.dialogRef.close();
+        },
+      });
+    }
   }
 
   cancel() {

@@ -18,12 +18,20 @@ export class ServiceTableComponent {
   cols: TableColumnInterface[] = [
     {
       header: 'Nombre',
-      field: 'nombre',
+      field: 'nombreServicio',
     },
     {
-      header: 'URL',
-      field: 'url',
+      header: 'Descripción',
+      field: 'descripcion',
     },
+    {
+      header: 'Tiempo',
+      field: 'tiempoAproximado',
+    },
+    // {
+    //   header: 'Tiempo',
+    //   field: 'tiempoEspera',
+    // },
     {
       header: 'Acciones',
       field: 'id',

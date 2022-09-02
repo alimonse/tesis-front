@@ -1,9 +1,9 @@
-<form [formGroup]="form" (keyup.enter)="sendForm()" class="mt-5">
+<form [formGroup]="form" (ngSubmit)="sendForm()" class="mt-5">
   <div class="grid grid-cols-8 gap-2">
     <div class="col-span-8 md:col-span-4">
       <app-input
-        id="nombre"
-        label="Nombre empresa"
+        id="nombreServicio"
+        label="Nombre servicio"
         placeholder="Ej: Bago"
         [type]="'text'"
         [formGroup]="form"
@@ -12,13 +12,37 @@
     </div>
     <div class="col-span-8 md:col-span-4">
       <app-input
-        id="url"
-        label="URL Servicio"
+        id="descripcion"
+        label="Descripción servicio"
         placeholder="Ej: Bago"
         [type]="'text'"
         [formGroup]="form"
         [required]="true"
       ></app-input>
     </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="tiempoAproximado"
+        label="Tiempo aproximado"
+        placeholder="Ej: Bago"
+        [type]="'datetime-local'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="tiempoEspera"
+        label="Tiempo espera"
+        placeholder="Ej: Bago"
+        [type]="'datetime-local'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+  </div>
+  <div class="grid grid-cols-2 gap-4 mt-10">
+    <app-button text="Cancelar" (clickAction)="cancel()"></app-button>
+    <app-button text="Guardar" [isFormButton]="true"></app-button>
   </div>
 </form>
