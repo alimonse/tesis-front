@@ -1,9 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TableColumnInterface } from '../../../../../../interfaces/table-column.interface';
 import {
   ROWS,
   ROWS_PER_PAGE_OPTION,
 } from '../../../../../../constants/constants';
+import { Router } from '@angular/router';
+import { ServiceInterface } from '../../interfaces/service.interface';
 
 @Component({
   selector: 'app-service-table',
@@ -41,6 +43,8 @@ export class ServiceTableComponent {
   rowsPerPageOptions = ROWS_PER_PAGE_OPTION;
   totalRecords = 10;
 
+  constructor(private readonly _router: Router) {}
+
   cargarRegistros(event: any) {
     console.log(event);
   }
@@ -49,7 +53,8 @@ export class ServiceTableComponent {
     this.onEdit.emit(rowData);
   }
 
-  goToSchedule(rowData: any) {
+  goToSchedule(rowData: ServiceInterface) {
     console.log(rowData);
+    this._router.navigate(['/appointment', 'services', rowData.id, 'schedule']);
   }
 }

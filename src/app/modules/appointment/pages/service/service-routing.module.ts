@@ -10,6 +10,11 @@ const routes: Routes = [
       breadcrumb: 'Gestión servicios',
     },
   },
+  {
+    path: ':id/schedule',
+    loadChildren: () =>
+      import('../schedule/schedule.module').then((mod) => mod.ScheduleModule),
+  },
 ];
 
 @NgModule({
