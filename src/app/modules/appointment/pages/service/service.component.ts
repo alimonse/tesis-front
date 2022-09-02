@@ -18,14 +18,7 @@ export class ServiceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._serviceService.findAll().subscribe({
-      next: (value) => {
-        this.services = value[0];
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.getEnterprises();
   }
 
   create() {
@@ -60,5 +53,24 @@ export class ServiceComponent implements OnInit {
         }
       },
     });
+  }
+
+  getEnterprises() {
+    const query = {
+      where: {},
+      order: {
+        id: 'ASC',
+      },
+    };
+    this._serviceService
+      .findAll(`busqueda=${JSON.stringify(query)}`)
+      .subscribe({
+        next: (value) => {
+          this.services = value[0];
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }

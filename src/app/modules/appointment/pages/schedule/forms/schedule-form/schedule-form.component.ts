@@ -73,7 +73,15 @@ export class ScheduleFormComponent implements OnInit {
   }
 
   getServices() {
-    const services$ = this._serviceService.findAll();
+    const query = {
+      where: {},
+      order: {
+        id: 'ASC',
+      },
+    };
+    const services$ = this._serviceService.findAll(
+      `busqueda=${JSON.stringify(query)}`
+    );
     services$.subscribe({
       next: (value) => {
         if (!value[0].length) {

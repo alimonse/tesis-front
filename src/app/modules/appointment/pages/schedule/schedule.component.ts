@@ -63,6 +63,9 @@ export class ScheduleComponent implements OnInit {
   getSchedules() {
     const query: any = {
       where: {},
+      order: {
+        id: 'ASC',
+      },
     };
     query.relations = ['horarioDia', 'horarioDia.prestacion'];
     const getHours$ = this._hourService.findAll(
