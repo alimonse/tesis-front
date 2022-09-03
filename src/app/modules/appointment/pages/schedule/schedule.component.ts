@@ -76,6 +76,7 @@ export class ScheduleComponent implements OnInit {
         if (!value[0].length) {
           console.log('sin data');
         }
+
         this.schedules = value[0]
           .map((item) => this.formatDataTable(item))
           .flat();
@@ -87,25 +88,20 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  formatDataTable(horarioHora: HourInterface): ScheduleInterface[] {
+  formatDataTable(horarioHora: HourInterface): ScheduleInterface {
     const { horarioDia } = horarioHora;
-    const { prestacion } = horarioDia as DayInterface;
-    const data = (prestacion as ServiceInterface[]).map((item) => {
-      const hora = horarioHora as HourInterface;
-      const dia = horarioDia as DayInterface;
-      const { id: idPrestacion } = item;
-      const { id: idDia } = dia;
-      delete dia.id;
-      delete hora.horarioDia;
-      delete item.id;
-      return {
-        ...hora,
-        ...dia,
-        ...item,
-        idPrestacion,
-        idDia,
-      };
-    });
-    return data;
+    const { id: idDia, prestacion } = horarioDia as DayInterface;
+    const { id: idPrestacion } = prestacion as ServiceInterface;
+    delete (horarioDia as DayInterface).id;
+    delete (horarioDia as DayInterface).prestacion;
+    delete horarioHora.horarioDia;
+    delete (prestacion as ServiceInterface).id;
+    return {
+      ...horarioHora,
+      ...(horarioDia as DayInterface),
+      ...(prestacion as ServiceInterface),
+      idPrestacion,
+      idDia,
+    };
   }
 }

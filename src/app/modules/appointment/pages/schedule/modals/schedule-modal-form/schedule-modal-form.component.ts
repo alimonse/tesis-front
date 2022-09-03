@@ -34,6 +34,7 @@ export class ScheduleModalFormComponent {
       let hora: HourInterface;
       const dayCreate$ = this._dayService.create({
         dia: payload.dia,
+        prestacion: servicio,
       });
       dayCreate$
         .pipe(
@@ -51,9 +52,7 @@ export class ScheduleModalFormComponent {
           }),
           mergeMap((hour) => {
             hora = hour;
-            return this._serviceService.updateOne(servicio, {
-              horarioDia: dia.id,
-            });
+            return this._serviceService.finOneById(servicio);
           })
         )
         .subscribe({
@@ -68,14 +67,15 @@ export class ScheduleModalFormComponent {
     } else {
       const { id: idHora, idPrestacion, idDia } = this.data;
       payload = payload as CreateScheduleInterface;
-      const dayEdit$ = this._dayService.updateOne(idDia!, { dia: payload.dia });
+      const dayEdit$ = this._dayService.updateOne(idDia!, {
+        dia: payload.dia,
+        prestacion: payload.servicio,
+      });
       const hourEdit$ = this._hourService.updateOne(idHora!, {
         desde: payload.desde,
         hasta: payload.hasta,
       });
-      const serviceEdit$ = this._serviceService.updateOne(idPrestacion!, {
-        horarioDia: payload.servicio,
-      });
+      const serviceEdit$ = this._serviceService.finOneById(idPrestacion!);
       dayEdit$
         .pipe(
           concatMap(() => hourEdit$),

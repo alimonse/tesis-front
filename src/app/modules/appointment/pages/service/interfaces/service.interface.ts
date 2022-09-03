@@ -1,3 +1,5 @@
+import { DayInterface } from '../../schedule/interfaces/day.interface';
+
 export interface ServiceInterface {
   nombreServicio?: string;
   descripcion?: string;
@@ -9,5 +11,5 @@ export interface ServiceInterface {
   habilitado?: 0 | 1;
   oficina?: number;
   colaborador?: number;
-  horarioDia?: number;
+  horarioDias?: DayInterface[];
 }
