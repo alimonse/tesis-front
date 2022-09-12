@@ -1,1 +1,120 @@
-<p>login works!</p>
+<div class="row login">
+  <div class="col-md-8 col-sm-12 imagen ocultar-imagen"></div>
+  <div
+    class="col-md-4 col-sm-12"
+    style="
+      background-color: #e8eeee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <div class="row">
+      <div
+        class="col-sm-12"
+        style="
+          background-color: #e8eeee;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 3rem;
+        "
+      >
+        <img src="assets/images/logo.svg" alt="" height="65px" width="200px" />
+      </div>
+      <div class="col-sm-12">
+        <div
+          style="
+            background: white;
+            padding: 1rem;
+            border: 1px solid #f5f5f5;
+            border-radius: 10px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          "
+        >
+          <section class="m-2">
+            <h1 class="text-xl flex justify-center text-gray-500 font-semibold">
+              {{ "bienvenido" | uppercase }}
+            </h1>
+
+            <div class="flex justify-center">
+              <span class="text-gray-500 text-xs">
+                Ingrese sus credenciales para ingresar
+              </span>
+            </div>
+          </section>
+
+          <form
+            *ngIf="formularioLogin"
+            [formGroup]="formularioLogin!"
+            (ngSubmit)="ingresar()"
+          >
+            <div class="row">
+              <!--                    <p-card>-->
+              <div class="col-sm-12">
+                <p>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Usuario</mat-label>
+                    <input
+                      matInput
+                      placeholder="Usuario"
+                      autocomplete="off"
+                      formControlName="usuario"
+                      style="text-transform: lowercase"
+                    />
+                    <mat-hint>Ingrese su usuario.</mat-hint>
+                    <mat-error *ngIf="campoUsuario?.hasError('required')">
+                      Campo obligatorio
+                    </mat-error>
+                  </mat-form-field>
+                </p>
+              </div>
+              <div class="col-sm-12">
+                <p>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input
+                      matInput
+                      [type]="showPassword ? 'text' : 'password'"
+                      placeholder="Password"
+                      autocomplete="off"
+                      type="password"
+                      formControlName="password"
+                    />
+                    <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                      {{ showPassword ? "visibility_off" : "visibility" }}
+                    </mat-icon>
+                    <mat-hint>Ingrese su password.</mat-hint>
+                    <mat-error *ngIf="campoPassword?.hasError('required')">
+                      Campo obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="campoPassword?.hasError('minlength')">
+                      Campo debe tener al menos 8 caracteres
+                    </mat-error>
+                    <mat-error *ngIf="campoPassword?.hasError('maxlength')">
+                      Campo debe tener maximo 16 caracteres
+                    </mat-error>
+                  </mat-form-field>
+                </p>
+              </div>
+
+              <!--                    </p-card>-->
+            </div>
+            <br />
+            <br />
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-outline-warning" type="submit">
+                    Ingresar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</div>

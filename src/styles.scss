@@ -5,6 +5,12 @@
   font-family: $font;
 }
 
+form {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
 .custom-mat-dialog {
   mat-dialog-container {
     background-color: white;
