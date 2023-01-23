@@ -1,49 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="sendForm()" class="mt-5">
   <div class="grid grid-cols-8 gap-2">
-    <div class="col-span-8 md:col-span-4">
+    <div class="col-span-8">
       <app-input
         id="nombreComercial"
         label="Nombre empresa"
-        placeholder="Ej: Bago"
-        [type]="'text'"
-        [formGroup]="form"
-        [required]="true"
-      ></app-input>
-    </div>
-    <div class="col-span-8 md:col-span-4">
-      <app-input
-        id="mensajeSaludo"
-        label="Mensaje saludo"
-        placeholder="Ej: Bago"
-        [type]="'text'"
-        [formGroup]="form"
-        [required]="true"
-      ></app-input>
-    </div>
-    <div class="col-span-8 md:col-span-4">
-      <app-input
-        id="informacion"
-        label="Información sobre empresa"
-        placeholder="Ej: Bago"
-        [type]="'text'"
-        [formGroup]="form"
-        [required]="true"
-      ></app-input>
-    </div>
-    <div class="col-span-8 md:col-span-4">
-      <app-input
-        id="ubicacion"
-        label="Ubicación google maps"
-        placeholder="Ej: Bago"
-        [type]="'text'"
-        [formGroup]="form"
-        [required]="true"
-      ></app-input>
-    </div>
-    <div class="col-span-8 md:col-span-4">
-      <app-input
-        id="lat"
-        label="Latitud"
         placeholder="Ej: Bago"
         [type]="'text'"
         [formGroup]="form"
@@ -60,6 +20,48 @@
         [required]="true"
       ></app-input>
     </div>
+    <div class="col-span-8 md:col-span-4">
+      <app-input
+        id="lat"
+        label="Latitud"
+        placeholder="Ej: Bago"
+        [type]="'text'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+    <div class="col-span-8">
+      <app-input
+        id="ubicacion"
+        label="Ubicación google maps"
+        placeholder="Ej: Bago"
+        [type]="'text'"
+        [formGroup]="form"
+        [required]="true"
+      ></app-input>
+    </div>
+  </div>
+  <div class="col-span-8 mt-2">
+    <app-input
+      id="informacion"
+      label="Información sobre empresa"
+      placeholder="Ej: Bago"
+      [type]="'text'"
+      [isTextarea]="true"
+      [formGroup]="form"
+      [required]="true"
+    ></app-input>
+  </div>
+  <div class="col-span-8 mt-2">
+    <app-input
+      id="mensajeSaludo"
+      label="Mensaje saludo"
+      placeholder="Ej: Bago"
+      [type]="'text'"
+      [isTextarea]="true"
+      [formGroup]="form"
+      [required]="true"
+    ></app-input>
   </div>
   <div class="grid grid-cols-2 gap-4 mt-10">
     <app-button text="Cancelar" (clickAction)="cancel()"></app-button>

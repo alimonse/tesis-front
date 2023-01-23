@@ -30,42 +30,42 @@ export class EnterpriseFormComponent implements OnInit {
       nombreComercial: [
         this.formData.nombreComercial ?? EMPTY_VALUE,
         [
-          FormsUtil.requiredValidator('nombreComercial'),
-          FormsUtil.minLengthValidator('nombreComercial', 3),
+          FormsUtil.requiredValidator('Nombre comercial'),
+          FormsUtil.minLengthValidator('Nombre comercial', 3),
         ],
       ],
       mensajeSaludo: [
         this.formData.mensajeSaludo ?? EMPTY_VALUE,
         [
-          FormsUtil.requiredValidator('nombreComercial'),
-          FormsUtil.minLengthValidator('mensajeSaludo', 3),
+          FormsUtil.requiredValidator('Saludo'),
+          FormsUtil.minLengthValidator('Saludo', 3),
         ],
       ],
       informacion: [
         this.formData.informacion ?? EMPTY_VALUE,
         [
-          FormsUtil.requiredValidator('nombreComercial'),
-          FormsUtil.minLengthValidator('informacion', 3),
+          FormsUtil.requiredValidator('Información'),
+          FormsUtil.minLengthValidator('Información', 3),
         ],
       ],
       ubicacion: [
-        '',
+        this.formData.lat && this.formData.lng ?  `https://www.google.com/maps/search/${this.formData.lat},+${this.formData.lng}?shorturl=1` : EMPTY_VALUE,
         [
-          FormsUtil.requiredValidator('nombreComercial'),
+          FormsUtil.requiredValidator('ubicacion'),
           FormsUtil.minLengthValidator('ubicacion', 3),
         ],
       ],
       lat: [
         this.formData.lat ?? EMPTY_VALUE,
         [
-          FormsUtil.requiredValidator('nombreComercial'),
+          FormsUtil.requiredValidator('Latitud'),
           FormsUtil.numberStringValidator,
         ],
       ],
       lng: [
         this.formData.lng ?? EMPTY_VALUE,
         [
-          FormsUtil.requiredValidator('nombreComercial'),
+          FormsUtil.requiredValidator('Longitud'),
           FormsUtil.numberStringValidator,
         ],
       ],

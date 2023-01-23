@@ -6,7 +6,13 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./location-enterprise.component.scss'],
 })
 export class LocationEnterpriseComponent {
-  @Input() url!: string;
+  uri = '';
   @Input() lat!: number;
   @Input() lng!: number;
+
+  @Input() set url(value: string) {
+    if (value) {
+      this.uri = `https://www.google.com/maps/search/${this.lat},+${this.lng}?shorturl=1`;
+    }
+  }
 }

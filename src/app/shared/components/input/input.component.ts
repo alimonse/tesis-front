@@ -5,6 +5,7 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -21,6 +22,7 @@ type InputType =
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class InputComponent implements OnChanges {
   @Input()
@@ -45,6 +47,8 @@ export class InputComponent implements OnChanges {
   isTextarea = false;
   @Input()
   textareaRows = 3;
+  @Input()
+  float = true;
 
   @Output()
   blurEvent: EventEmitter<boolean> = new EventEmitter();
