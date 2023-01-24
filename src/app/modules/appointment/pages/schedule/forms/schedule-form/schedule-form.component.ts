@@ -47,13 +47,13 @@ export class ScheduleFormComponent implements OnInit {
       ],
       desde: [
         this.formData?.desde
-          ? formatDate(new Date(this.formData?.desde), 'yyyy-MM-ddThh:mm', 'en')
+          ? formatDate(new Date(this.formData?.desde), 'hh:mm', 'en')
           : EMPTY_VALUE,
         [FormsUtil.requiredValidator('desde')],
       ],
       hasta: [
         this.formData?.hasta
-          ? formatDate(new Date(this.formData?.hasta), 'yyyy-MM-ddThh:mm', 'en')
+          ? formatDate(new Date(this.formData?.hasta), 'hh:mm', 'en')
           : EMPTY_VALUE,
         [FormsUtil.requiredValidator('hasta')],
       ],
@@ -62,6 +62,14 @@ export class ScheduleFormComponent implements OnInit {
 
   sendForm() {
     if (this.form.valid) {
+      console.log(this.form.value)
+      const now = formatDate(
+        new Date(Date.now()),
+        'yyyy-mm-dd',
+        'en'
+      )
+      this.form.value.desde = `${now}T${this.form.value.desde}`
+      this.form.value.hasta = `${now}T${this.form.value.hasta}`
       this.onCreateOrUpdate.emit(this.form.value);
     } else {
       this.form.markAllAsTouched();

@@ -47,7 +47,7 @@ export class ServiceFormComponent implements OnInit {
         this.formData?.tiempoAproximado
           ? formatDate(
               new Date(this.formData?.tiempoAproximado),
-              'yyyy-MM-ddThh:mm',
+              'hh:mm',
               'en'
             )
           : EMPTY_VALUE,
@@ -57,7 +57,7 @@ export class ServiceFormComponent implements OnInit {
         this.formData?.tiempoEspera
           ? formatDate(
               new Date(this.formData?.tiempoEspera),
-              'yyyy-MM-ddThh:mm',
+              'hh:mm',
               'en'
             )
           : EMPTY_VALUE,
@@ -68,6 +68,14 @@ export class ServiceFormComponent implements OnInit {
 
   sendForm() {
     if (this.form.valid) {
+
+      const now = formatDate(
+        new Date(Date.now()),
+        'yyyy-mm-dd',
+        'en'
+      )
+      this.form.value.tiempoAproximado = `${now}T${this.form.value.tiempoAproximado}`
+      this.form.value.tiempoEspera = `${now}T${this.form.value.tiempoEspera}`
       this.onCreateOrUpdate.emit(this.form.value);
     } else {
       this.form.markAllAsTouched();
