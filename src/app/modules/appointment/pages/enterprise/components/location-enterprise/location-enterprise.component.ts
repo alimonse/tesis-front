@@ -7,8 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class LocationEnterpriseComponent {
   uri = '';
-  @Input() lat!: number;
-  @Input() lng!: number;
+  @Input() lat!: string;
+  @Input() lng!: string;
 
   @Input() set url(value: string) {
     if (value) {

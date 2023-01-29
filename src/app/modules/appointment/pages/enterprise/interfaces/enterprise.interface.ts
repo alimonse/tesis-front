@@ -5,8 +5,8 @@ export interface EnterpriseInterface {
   nombreComercial?: string;
   mensajeSaludo?: string;
   informacion?: string;
-  lat?: number;
-  lng?: number;
+  lat?: string;
+  lng?: string;
   ruc?: string;
   habilitado?: number;
   ubicacion?: string;

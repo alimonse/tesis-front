@@ -8,6 +8,7 @@ import { ServiceInterface } from '../../../service/interfaces/service.interface'
 import { formatDate } from '@angular/common';
 import { ScheduleInterface } from '../../interfaces/schedule.interface';
 import { EMPTY_VALUE } from '../../../../../../constants/constants';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-schedule-form',
@@ -46,15 +47,11 @@ export class ScheduleFormComponent implements OnInit {
         [FormsUtil.requiredValidator('dia')],
       ],
       desde: [
-        this.formData?.desde
-          ? formatDate(new Date(this.formData?.desde), 'hh:mm', 'en')
-          : EMPTY_VALUE,
+        this.formData?.desde ?? EMPTY_VALUE,
         [FormsUtil.requiredValidator('desde')],
       ],
       hasta: [
-        this.formData?.hasta
-          ? formatDate(new Date(this.formData?.hasta), 'hh:mm', 'en')
-          : EMPTY_VALUE,
+        this.formData?.hasta ?? EMPTY_VALUE,
         [FormsUtil.requiredValidator('hasta')],
       ],
     });
@@ -62,15 +59,26 @@ export class ScheduleFormComponent implements OnInit {
 
   sendForm() {
     if (this.form.valid) {
-      console.log(this.form.value)
-      const now = formatDate(
-        new Date(Date.now()),
-        'yyyy-mm-dd',
-        'en'
-      )
-      this.form.value.desde = `${now}T${this.form.value.desde}`
-      this.form.value.hasta = `${now}T${this.form.value.hasta}`
-      this.onCreateOrUpdate.emit(this.form.value);
+      console.log(this.form.value);
+      const { desde, hasta } = this.form.value;
+      const [desdeHour, desdeMin] = desde.split(':');
+      const from = new Date(
+        new Date(new Date(Date.now()).setHours(desdeHour)).setMinutes(desdeMin)
+      );
+      const [hastaHour, hastaMin] = hasta.split(':');
+      const until = new Date(
+        new Date(new Date(Date.now()).setHours(hastaHour)).setMinutes(hastaMin)
+      );
+      console.log(from, until);
+      if (from.getTime() <= until.getTime()) {
+        this.onCreateOrUpdate.emit(this.form.value);
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Hora de servicio!',
+          text: 'La hora hasta debe ser mayor a la hora desde',
+        });
+      }
     } else {
       this.form.markAllAsTouched();
     }

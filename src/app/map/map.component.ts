@@ -16,15 +16,15 @@ export class MapComponent implements AfterViewInit {
     private readonly _mapService: MapService
   ) {}
 
-  ngAfterViewInit() {
-    // if (!this._placesService.userLocation)
-    //   throw new Error('Sin location _placesService.userLocation');
+  async ngAfterViewInit() {
+    await this._placesService.getUserLocation();
+    if (!this._placesService.userLocation)
+      throw new Error('Sin location _placesService.userLocation');
 
     const map = new Map({
       container: this.mapDivElement.nativeElement,
       style: 'mapbox://styles/mapbox/streets-v11', // style URL
-      // center: this._placesService.userLocation, // starting position [lng, lat]
-      center: [-78.551223, -0.262398],
+      center: this._placesService.userLocation, // starting position [lng, lat]
       zoom: 14, // starting zoom
     });
 
@@ -34,19 +34,18 @@ export class MapComponent implements AfterViewInit {
       `);
 
     const marker = new Marker({ color: 'red' })
-      // .setLngLat(this._placesService.userLocation)
-      .setLngLat([-78.551223, -0.262398])
+      .setLngLat(this._placesService.userLocation)
       .setPopup(popup)
       .addTo(map);
 
-    const bounds = new LngLatBounds();
-    bounds.extend(marker.getLngLat());
-    bounds.extend([-78.551223, -0.262398]);
+    marker.addTo(map);
+    // const bounds = new LngLatBounds();
+    // bounds.extend(marker.getLngLat());
+    // bounds.extend([-78.551223, -0.262398]);
 
-    map.fitBounds(bounds, {
-      padding: 200,
-    });
-
+    // map.fitBounds(bounds, {
+    //   padding: 200,
+    // });
     this._mapService.setMap(map);
   }
 }

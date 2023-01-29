@@ -19,7 +19,7 @@ export class PlaceService {
     // private readonly _placesApiClient: PlacesApiClient,
     private readonly _mapService: MapService
   ) {
-    this.getUserLocation();
+    this.getUserLocation().then();
   }
 
   async getUserLocation(): Promise<[number, number]> {

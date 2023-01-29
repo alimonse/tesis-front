@@ -36,11 +36,11 @@
         <section *ngIf="col.header === 'Horario'">
           <strong class="text-sm font-medium">Desde: </strong
           ><span class="text-sm font-normal">
-            {{ rowData[col.field] | date: "h:mm" }}
+            {{ rowData[col.field] }}
           </span>
           <br />
           <strong class="text-sm font-medium">Hasta: </strong
-          >{{ rowData["hasta"] | date: "h:mm" }}
+          >{{ rowData["hasta"] }}
         </section>
         <section *ngIf="col.header === 'Dia'">
           {{ rowData[col.field] }}

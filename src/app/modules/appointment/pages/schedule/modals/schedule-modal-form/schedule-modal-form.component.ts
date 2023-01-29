@@ -42,12 +42,8 @@ export class ScheduleModalFormComponent {
             dia = day!;
             return this._hourService.create({
               horarioDia: day.id,
-              desde: new Date(
-                (payload as CreateScheduleInterface).desde
-              ).toISOString(),
-              hasta: new Date(
-                (payload as CreateScheduleInterface).hasta
-              ).toDateString(),
+              desde: (payload as CreateScheduleInterface).desde,
+              hasta: (payload as CreateScheduleInterface).hasta,
             });
           }),
           mergeMap((hour) => {

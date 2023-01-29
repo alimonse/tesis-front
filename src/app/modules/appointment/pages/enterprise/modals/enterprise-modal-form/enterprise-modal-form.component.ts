@@ -22,8 +22,8 @@ export class EnterpriseModalFormComponent {
     const { id } = this.data;
     const paylaod: EnterpriseInterface = {
       ...event,
-      lng: +event.lng!,
-      lat: +event.lat!,
+      lng: event.lng!,
+      lat: event.lat!,
     };
     delete paylaod.id;
     delete paylaod.ubicacion;

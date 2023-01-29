@@ -44,23 +44,11 @@ export class ServiceFormComponent implements OnInit {
         ],
       ],
       tiempoAproximado: [
-        this.formData?.tiempoAproximado
-          ? formatDate(
-              new Date(this.formData?.tiempoAproximado),
-              'hh:mm',
-              'en'
-            )
-          : EMPTY_VALUE,
+        this.formData?.tiempoAproximado ?? EMPTY_VALUE,
         [FormsUtil.requiredValidator('tiempoAproximado')],
       ],
       tiempoEspera: [
-        this.formData?.tiempoEspera
-          ? formatDate(
-              new Date(this.formData?.tiempoEspera),
-              'hh:mm',
-              'en'
-            )
-          : EMPTY_VALUE,
+        this.formData?.tiempoEspera ?? EMPTY_VALUE,
         [FormsUtil.requiredValidator('tiempoEspera')],
       ],
     });
@@ -68,14 +56,9 @@ export class ServiceFormComponent implements OnInit {
 
   sendForm() {
     if (this.form.valid) {
-
-      const now = formatDate(
-        new Date(Date.now()),
-        'yyyy-mm-dd',
-        'en'
-      )
-      this.form.value.tiempoAproximado = `${now}T${this.form.value.tiempoAproximado}`
-      this.form.value.tiempoEspera = `${now}T${this.form.value.tiempoEspera}`
+      // const now = formatDate(new Date(Date.now()), 'yyyy-mm-dd', 'en');
+      // this.form.value.tiempoAproximado = `${now}T${this.form.value.tiempoAproximado}`;
+      // this.form.value.tiempoEspera = `${now}T${this.form.value.tiempoEspera}`;
       this.onCreateOrUpdate.emit(this.form.value);
     } else {
       this.form.markAllAsTouched();

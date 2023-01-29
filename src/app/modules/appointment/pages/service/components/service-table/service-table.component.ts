@@ -27,7 +27,7 @@ export class ServiceTableComponent {
       field: 'descripcion',
     },
     {
-      header: 'Tiempo',
+      header: 'Tiempo (min)',
       field: 'tiempoAproximado',
     },
     // {
